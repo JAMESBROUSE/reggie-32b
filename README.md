@@ -5,24 +5,37 @@
 [![White Paper](https://img.shields.io/badge/White%20Paper-brousegroup.ca-blue)](https://brousegroup.ca/reggie.html)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 
-**REGGIE-V6 (32B)** is an autonomous cybersecurity, industrial infrastructure, and hardware-sentinel LLM. Built on top of `Qwen/Qwen2.5-Coder-32B-Instruct`, it was fine-tuned with custom low-rank adapters (LoRA) and quantized to 4-bit medium (`Q4_K_M`) via a sovereign local streaming pipeline in C++.
+**REGGIE-V6 (32B)** is an autonomous cybersecurity, industrial infrastructure, and hardware-sentinel LLM. Built on top of `Qwen/Qwen2.5-Coder-32B-Instruct`, it was fine-tuned with custom low-rank adapters (LoRA) and quantized to multiple GGUF formats using a sovereign local streaming pipeline in C++.
 
 * **Full Architecture White Paper & Journey:** [https://brousegroup.ca/reggie.html](https://brousegroup.ca/reggie.html)
 * **Raw White Paper:** [`WHITE_PAPER.md`](WHITE_PAPER.md)
-* **Pre-quantized 19.9 GB GGUF:** [Bigchilli1978/reggie-v6-32b-GGUF](https://huggingface.co/Bigchilli1978/reggie-v6-32b-GGUF)
+* **Pre-quantized GGUFs:** [Bigchilli1978/reggie-v6-32b-GGUF](https://huggingface.co/Bigchilli1978/reggie-v6-32b-GGUF)
 * **LoRA Adapters:** [Bigchilli1978/reggie-v6-32b](https://huggingface.co/Bigchilli1978/reggie-v6-32b)
+
+---
+
+## ⚡ Quantization Matrix & Hardware Support
+
+| Quantization | Size | BPW | Recommended Hardware | Ollama 1-Click Run |
+| :--- | :--- | :--- | :--- | :--- |
+| **`reggie-v6-32b-Q3_K_M.gguf`** | **15.9 GB** | 3.89 | **16 GB VRAM GPUs** (RTX 4060 Ti 16GB, RTX 4080, 16GB Mac) | `ollama run hf.co/Bigchilli1978/reggie-v6-32b-GGUF:reggie-v6-32b-Q3_K_M.gguf` |
+| **`reggie-v6-32b-Q4_K_M.gguf`** | **19.9 GB** | 4.85 | **24 GB VRAM GPUs** (RTX 3090 / 4090, 32GB+ Mac) | `ollama run hf.co/Bigchilli1978/reggie-v6-32b-GGUF:reggie-v6-32b-Q4_K_M.gguf` |
 
 ---
 
 ## 🚀 Quickstart: 1-Click Run with Ollama
 
-Run REGGIE-V6-32B directly on local workstation hardware (~20 GB VRAM or VRAM + system RAM offloading):
+Run REGGIE-V6-32B directly on local hardware without manual compilation:
 
 ```bash
+# For 16 GB VRAM GPUs (100% full VRAM offload):
+ollama run hf.co/Bigchilli1978/reggie-v6-32b-GGUF:reggie-v6-32b-Q3_K_M.gguf
+
+# For 24 GB+ VRAM GPUs:
 ollama run hf.co/Bigchilli1978/reggie-v6-32b-GGUF:reggie-v6-32b-Q4_K_M.gguf
 ```
 
-Or clone this repository, download `reggie-v6-32b-Q4_K_M.gguf`, and run:
+Or clone this repository, download your chosen GGUF file, and run:
 
 ```bash
 ollama create reggie -f Modelfile
